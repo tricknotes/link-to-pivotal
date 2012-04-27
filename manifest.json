@@ -1,0 +1,9 @@
+{
+    "name": "link2pivotal"
+  , "description": "Auto link to Pivotal Tracker."
+  , "version": "0.0.0"
+  , "content_scripts": [{
+      "matches": ["https://github.com/*"]
+    , "js": ["user_scripts.js"]
+  }]
+}
