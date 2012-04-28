@@ -4,6 +4,21 @@
       , LINK_TEMPLATE = '<a href="'+PIVOTAL_STORY_URL+'%s">%s</a>'
       , QUERIES = ['.commit .commit-title', '.commit .commit-desc']
 
+  var linkToPivotal = function(text, processor) {
+    return text.replace(STORY_ID_MATCHER, function(matched, id) {
+      var values = [id, matched]
+        , i = 0
+      var linked = LINK_TEMPLATE.replace(/%s/g, function() {
+        return values[i++ % 2];
+      });
+      if (processor) {
+        return processor(linked);
+      } else {
+        return linked;
+      }
+    });
+  };
+
   QUERIES.forEach(function(query) {
     var messages = document.querySelectorAll(query);
     var i, message, text, replaced, anchor;
@@ -12,22 +27,11 @@
       text = message.innerHTML;
       anchor = message.querySelector('a');
       if (anchor) {
-        replaced = text.replace(STORY_ID_MATCHER, function(matched, id) {
-          var values = [id, matched]
-            , i = 0
-          var linked = LINK_TEMPLATE.replace(/%s/g, function() {
-            return values[i++ % 2];
-          });
-          return '</a>' + linked + '<a href="' + anchor.getAttribute('href') + '">'
+        replaced = linkToPivotal(text, function(linked) {
+          return '</a>' + linked + '<a href="' + anchor.getAttribute('href') + '">';
         });
       } else {
-        replaced = text.replace(STORY_ID_MATCHER, function(matched, id) {
-          var values = [id, matched]
-            , i = 0
-          return LINK_TEMPLATE.replace(/%s/g, function() {
-            return values[i++ % 2];
-          });
-        });
+        replaced = linkToPivotal(text);
       }
       message.innerHTML = replaced;
     }
