@@ -1,6 +1,6 @@
 !function() {
   const PIVOTAL_STORY_URL = 'https://www.pivotaltracker.com/story/show/'
-      , STORY_ID_MATCHER = /\[(?:Finish )?#([0-9]{8})\]/
+      , STORY_ID_MATCHER = /\[(?:[a-zA-Z]+ )?#([0-9]{8})\]/
       , LINK_TEMPLATE = '<a href="'+PIVOTAL_STORY_URL+'%s">%s</a>'
       , QUERIES = ['.commit .commit-title', '.commit .commit-desc']
 
