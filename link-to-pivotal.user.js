@@ -9,7 +9,7 @@
   const PIVOTAL_STORY_URL = 'https://www.pivotaltracker.com/story/show/'
       , STORY_ID_MATCHER = /\[(?:[a-zA-Z]+ )?#([0-9]{8})\]/
       , LINK_TEMPLATE = '<a href="'+PIVOTAL_STORY_URL+'%s" class="issue-link">%s</a>'
-      , QUERIES = ['.commit .commit-title', '.commit .commit-desc']
+      , QUERIES = ['.commit .commit-title', '.commit .commit-desc', 'table.tree-browser td.message']
 
   var linkToPivotal = function(text, processor) {
     return text.replace(STORY_ID_MATCHER, function(matched, id) {
