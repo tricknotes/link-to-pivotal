@@ -28,7 +28,7 @@
       anchor = message.querySelector('a');
       if (anchor) {
         replaced = linkToPivotal(text, function(linked) {
-          return '</a>' + linked + '<a href="' + anchor.getAttribute('href') + '">';
+          return '</a>' + linked + '<a href="' + escape(anchor.getAttribute('href')) + '">';
         });
       } else {
         replaced = linkToPivotal(text);
