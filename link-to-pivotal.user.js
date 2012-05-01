@@ -35,7 +35,15 @@
       anchor = message.querySelector('a');
       if (anchor) {
         replaced = linkToPivotal(text, function(linked) {
-          return '</a>' + linked + '<a href="' + escape(anchor.getAttribute('href')) + '">';
+          var attributes = anchor.attributes
+            , serializedAttributes = []
+            , attribute
+            , index
+          for (index = attributes.length; index--;) {
+            attribute = attributes.item(index);
+            serializedAttributes.push(attribute.name + '="' + escape(attribute.value) + '"');
+          }
+          return '</a>' + linked + '<a ' + serializedAttributes.join(' ') + '>';
         });
       } else {
         replaced = linkToPivotal(text);
