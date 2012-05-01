@@ -1,3 +1,10 @@
+// ==UserScript==
+// @name        Link to Pivotal
+// @version     0.0.1
+// @namespace   https://github.com/tricknotes
+// @description Auto link to Pivotal Tracker from Github.
+// @include     https://github.com/*
+// ==/UserScript==
 !function() {
   const PIVOTAL_STORY_URL = 'https://www.pivotaltracker.com/story/show/'
       , STORY_ID_MATCHER = /\[(?:[a-zA-Z]+ )?#([0-9]{8})\]/
