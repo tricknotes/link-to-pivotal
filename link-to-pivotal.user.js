@@ -25,10 +25,9 @@
 
   QUERIES.forEach(function(query) {
     var messages = document.querySelectorAll(query);
-    var i, message, text, replaced, anchor;
+    var i, message, anchor;
     for (i = messages.length; i--;) {
       message = messages.item(i);
-      text = message.innerHTML;
       anchor = message.querySelector('a');
       if (anchor) {
         var nodes = message.childNodes;
