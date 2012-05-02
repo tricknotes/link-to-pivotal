@@ -8,21 +8,18 @@
 !function() {
   const PIVOTAL_STORY_URL = 'https://www.pivotaltracker.com/story/show/'
       , STORY_ID_MATCHER = /\[(?:[a-zA-Z]+ )?#([0-9]{8})\]/
+      , STORY_ID_SPLITER = /(\[(?:[a-zA-Z]+ )?#[0-9]{8}\])/
       , LINK_TEMPLATE = '<a href="'+PIVOTAL_STORY_URL+'%s" class="issue-link">%s</a>'
       , QUERIES = ['.commit .commit-title', '.commit .commit-desc', 'table.tree-browser td.message']
 
-  var linkToPivotal = function(text, processor) {
+  var linkToPivotal = function(text) {
     return text.replace(STORY_ID_MATCHER, function(matched, id) {
       var values = [id, matched]
         , i = 0
       var linked = LINK_TEMPLATE.replace(/%s/g, function() {
         return values[i++ % 2];
       });
-      if (processor) {
-        return processor(linked);
-      } else {
-        return linked;
-      }
+      return linked;
     });
   };
 
@@ -34,21 +31,41 @@
       text = message.innerHTML;
       anchor = message.querySelector('a');
       if (anchor) {
-        replaced = linkToPivotal(text, function(linked) {
-          var attributes = anchor.attributes
-            , serializedAttributes = []
-            , attribute
-            , index
-          for (index = attributes.length; index--;) {
-            attribute = attributes.item(index);
-            serializedAttributes.push(attribute.name + '="' + escape(attribute.value) + '"');
+        var nodes = message.childNodes;
+        for (var j = nodes.length; j--;) {
+          var node = nodes.item(j);
+          if ('A' === node.nodeName) {
+            var edge = node.outerHTML.split(node.innerHTML)
+              , head = edge[0]
+              , tail = edge[1]
+              , splitted
+              , mapped
+            splitted = node.textContent.split(STORY_ID_SPLITER);
+            mapped = splitted.map(function(text, i) {
+              if (STORY_ID_SPLITER.test(text)) {
+                text = linkToPivotal(text);
+              } else {
+                var isEdge = false;
+                if (0 === i){
+                  text = text + tail;
+                  isEdge = true;
+                }
+                if (splited.length - 1 === i) {
+                  text = head + text;
+                  isEdge = true;
+                }
+                if (!isEdge) {
+                  text = head + text + tail;
+                }
+              }
+              return text;
+            });
+            node.outerHTML = mapped.join('');
           }
-          return '</a>' + linked + '<a ' + serializedAttributes.join(' ') + '>';
-        });
+        }
       } else {
-        replaced = linkToPivotal(text);
+        message.innerHTML = linkToPivotal(message.innerHTML);
       }
-      message.innerHTML = replaced;
     }
   });
 }();
