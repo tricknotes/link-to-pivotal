@@ -42,11 +42,10 @@
             splitted = node.textContent.split(STORY_ID_SPLITER);
             mapped = splitted.map(function(text, i) {
               if (STORY_ID_SPLITER.test(text)) {
-                text = linkToPivotal(text);
+                return linkToPivotal(text);
               } else {
-                text = head + text + tail;
+                return head + text + tail;
               }
-              return text;
             });
             node.outerHTML = mapped.join('');
           }
