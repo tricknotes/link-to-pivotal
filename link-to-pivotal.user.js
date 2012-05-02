@@ -35,8 +35,8 @@
           var node = nodes.item(j);
           if ('A' === node.nodeName) {
             var edge = node.outerHTML.split(node.innerHTML)
-              , head = edge[0]
-              , tail = edge[1]
+              , tail = edge.pop()
+              , head = edge.join(node.innerHTML)
               , splitted
               , mapped
             splitted = node.textContent.split(STORY_ID_SPLITER);
