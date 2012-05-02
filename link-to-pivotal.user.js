@@ -45,18 +45,7 @@
               if (STORY_ID_SPLITER.test(text)) {
                 text = linkToPivotal(text);
               } else {
-                var isEdge = false;
-                if (0 === i){
-                  text = text + tail;
-                  isEdge = true;
-                }
-                if (splited.length - 1 === i) {
-                  text = head + text;
-                  isEdge = true;
-                }
-                if (!isEdge) {
-                  text = head + text + tail;
-                }
+                text = head + text + tail;
               }
               return text;
             });
