@@ -2,6 +2,9 @@
 
 The user script for auto link to [Pivotal Tracker](http://pivotaltracker.com) from [GitHub](https://github.com).
 
+If you will push a commit including story id for Pivotal Tracker (such as `[#12345678] Improve README`),
+The story id will be linked to pivotal tracker in automatically.
+
 ## Installation
 
 From [userscripts.org](http://userscripts.org)
