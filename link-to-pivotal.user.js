@@ -10,7 +10,12 @@
       , STORY_ID_MATCHER = /(?:[a-zA-Z]+ )?#([0-9]{8})/
       , STORY_ID_SPLITER = /((?:[a-zA-Z]+ )?#[0-9]{8})/
       , LINK_TEMPLATE = '<a href="'+PIVOTAL_STORY_URL+'%s" class="issue-link">%s</a>'
-      , QUERIES = ['.commit .commit-title', '.commit .commit-desc', 'table.tree-browser td.message', 'td.message code']
+      , QUERIES = [
+          '.commit .commit-title'
+        , '.commit .commit-desc'
+        , 'table.tree-browser td.message'
+        , 'td.message code'
+      ]
 
   var linkToPivotal = function(text) {
     return text.replace(STORY_ID_MATCHER, function(matched, id) {
