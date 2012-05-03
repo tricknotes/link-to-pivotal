@@ -3,6 +3,7 @@
 // @version     0.0.1
 // @namespace   https://github.com/tricknotes
 // @description Auto link to Pivotal Tracker from Github.
+// @license     MIT License
 // @include     https://github.com/*
 // ==/UserScript==
 !function() {
