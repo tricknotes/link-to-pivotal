@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name        Link to Pivotal
-// @version     0.0.1
+// @version     0.0.2
 // @namespace   https://github.com/tricknotes
 // @description Auto link to Pivotal Tracker from Github.
 // @license     MIT License
