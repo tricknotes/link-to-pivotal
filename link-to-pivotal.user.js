@@ -16,6 +16,7 @@
         , '.commit .commit-desc'
         , 'table.tree-browser td.message'
         , 'td.message code'
+        , '.message blockquote'
       ]
 
   var linkToPivotal = function(text) {
