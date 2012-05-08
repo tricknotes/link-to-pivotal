@@ -17,6 +17,8 @@
         , 'table.tree-browser td.message'
         , 'td.message code'
         , '.message blockquote'
+        , '.content-title'
+        , '.content-body'
       ]
 
   var linkToPivotal = function(text) {
