@@ -19,6 +19,7 @@
         , '.message blockquote'
         , '.content-title'
         , '.content-body'
+        , '.comment-body'
       ]
 
   var linkToPivotal = function(text) {
